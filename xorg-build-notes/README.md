@@ -25,8 +25,9 @@ libcrpto | openssl
 libmd | gromacs
 xsltproc | libxslt
 
-## Problems I faced while building [X.Org](https://www.x.org/wiki/Building_the_X_Window_System/)
+## Problems I faced while building [X.Org](https://www.x.org/wiki/Building_the_X_Window_System/) 
 
+--- 
 - Bug in automake makes build throw this error: 
 
 ```bash
@@ -34,10 +35,15 @@ Unescaped left brace in regex is illegal here in regex; marked by <-- HERE in m/
 ```
 Solution: [Patch for the bug](https://aur.archlinux.org/cgit/aur.git/tree/perl2.6.patch?h=automake-1.11)
 
+---
 - Error while building of docs/xorg-docs: [Pastebin link is here](https://pastebin.com/37Q29cat)
 
-Solution: 
+Solution: The problem was solved when I installed a few development libraries. 
 
-- libsha1 package is not installed on my machine. Its alternative mentioned in libsilc but I am unable to install it from the package manager. Package manager says package not found. 
+```bash
+$ sudo dnf groupinstall "Development Tools" "Development Libraries" "X Software Development" "C Development Tools and Libraries"
+```
+---
+- I am currently facing issue while the build.sh is building mesa.  
 
 Solution: 
