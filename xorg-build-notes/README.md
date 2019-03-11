@@ -44,6 +44,21 @@ Solution: The problem was solved when I installed a few development libraries.
 $ sudo dnf groupinstall "Development Tools" "Development Libraries" "X Software Development" "C Development Tools and Libraries"
 ```
 ---
-- I am currently facing issue while the build.sh is building mesa.  
+- I am currently facing issue while the build.sh is building mesa. Autotools are deprecated in favor of meson build for mesa. It requires to provide flag --enable-autotools to the ./configure of mesa. 
+- I tried meson build manually by running `meson builddir/`. Getting the following error:
 
-Solution: 
+```bash
+Dependency libelf found: NO (tried pkgconfig and cmake)
+meson.build:1254:4: ERROR:  C library 'elf' not found
+```
+
+Solution: mesa was successfully built by manually running the meson build. The `'elf'` error was solved after installing a few mesa dependencies by using the following command:
+
+```bash
+$ sudo dnf builddep mesa
+```
+
+For the time being I have commented out mesa in the build.sh script list. 
+
+---
+- Error with "app/xdm". I added a few custom paths for direct access to ns2 executable. I think they are messing with the build script. 
